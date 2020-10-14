@@ -2,6 +2,7 @@
 #define COMPUTADORA_H
 
 #include<iostream>
+#include<iomanip>
 
 using namespace std;
 
@@ -29,6 +30,37 @@ public:
 
     void setEspacio(const string &espacio);
     string getEspacio();
+
+    friend ostream& operator<<(ostream &out, const Computadora &c){
+
+        out << left;
+        out << setw(13) << c.sistemaop;
+        out << setw(16) << c.procesador;
+        out << setw(12) << c.RAM;
+        out << setw(8) << c.espacio;
+        out << endl;
+
+        return out;
+    }
+
+    friend istream& operator>>(istream &in, Computadora &c){
+
+        cout << "Sistema Operativo: ";
+        getline(cin, c.sistemaop);
+        
+        cout << "Procesador: ";
+        getline(cin, c.procesador);
+
+        cout << "RAM (GB): ";
+        cin >> c.RAM; cin.ignore();
+
+        cout << "Espacio: ";
+        getline(cin, c.espacio);
+
+        cout << endl;
+
+        return in;
+    }
 
 };
 
